@@ -40,11 +40,12 @@ func GetCfgInt(key string, def ...int) int {
 
 /**建立数据库链接*/
 func OpenEngine(addr, username, password, dbname string) *xorm.Engine {
-	engine, err := xorm.NewEngine("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf-8", username, password, addr, dbname))
+	engine, err := xorm.NewEngine("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", username, password, addr, dbname))
 	if err != nil {
 		panic(err)
 	}
 	if err := engine.Ping(); err != nil {
+		fmt.Println("数据库链接失败")
 		fmt.Println(err)
 	}
 	//defer engine.Close() //延迟关闭数据库

@@ -6,7 +6,7 @@ import (
 	"head_server/support"
 )
 
-var connection = "db_ex_chain_store"
+var connection = "db_ex_doctor"
 
 func SetChainBranchRelation() *xorm.Engine {
 	host := "127.0.0.1"
@@ -15,7 +15,7 @@ func SetChainBranchRelation() *xorm.Engine {
 	password := "123456"
 	dbname := connection
 	fmt.Printf("====%v \n", host)
-	addr := fmt.Sprintf("%s:%d", host, port)
+	addr := fmt.Sprintf("%s:%s", host, port)
 	return support.OpenEngine(addr, username, password, dbname)
 }
 
