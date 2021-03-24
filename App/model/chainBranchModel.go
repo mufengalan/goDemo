@@ -34,9 +34,9 @@ func GetShopList(AppId string) string {
 
 	if has {
 		fmt.Println("查询成功")
-		return Student.Name
+
 	} else {
 		fmt.Println("数据不存在")
-		return Student.Name
 	}
+	return Student.Name
 }
