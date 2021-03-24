@@ -9,10 +9,10 @@ import (
 var connection = "db_ex_doctor"
 
 func SetChainBranchRelation() *xorm.Engine {
-	host := "127.0.0.1"
-	port := "3306"
-	username := "root"
-	password := "123456"
+	host := support.GetCfgString("LOCAL_HOST")
+	port := support.GetCfgString("LOCAL_PORT")
+	username := support.GetCfgString("LOCAL_USER")
+	password := support.GetCfgString("LOCAL_PASS")
 	dbname := connection
 	fmt.Printf("====%v \n", host)
 	addr := fmt.Sprintf("%s:%s", host, port)
@@ -20,7 +20,7 @@ func SetChainBranchRelation() *xorm.Engine {
 }
 
 type student struct {
-	name string
+	Name string
 }
 
 func GetShopList(AppId string) string {
@@ -30,12 +30,13 @@ func GetShopList(AppId string) string {
 	Student := &student{}
 	has, _ := engine.Where("id = ?", 1).Cols("name").Get(Student)
 	//has, _:= engine.Sql("select head_app_id from t_chain_branch_relation where id = ?",2).Get(student)
-	fmt.Printf("user:%v\n", Student.name)
+	fmt.Printf("user:%s\n", Student.Name)
 
 	if has {
-		return Student.name
+		fmt.Println("查询成功")
+		return Student.Name
 	} else {
 		fmt.Println("数据不存在")
-		return Student.name
+		return Student.Name
 	}
 }
