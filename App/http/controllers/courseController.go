@@ -9,6 +9,21 @@ import (
 func DoctorList(c *gin.Context) {
 
 	type Request struct {
+		ID int `json:"id"`
+	}
+	var request Request
+	c.BindJSON(&request)
+
+	id := request.ID
+	name := model.GetDoctorList(id)
+	c.JSON(http.StatusOK, gin.H{
+		"name": name,
+	})
+	return
+}
+
+func ShopList(c *gin.Context) {
+	type Request struct {
 		AppId          string `json:"app_id"`
 		ShopName       string `json:"shop_name"`
 		ShopStatus     int    `json:"shop_status"`
@@ -18,16 +33,5 @@ func DoctorList(c *gin.Context) {
 	}
 	var request Request
 	c.BindJSON(&request)
-
-	appId := request.AppId
-	headAppId := model.GetDoctorList(appId)
-	c.JSON(http.StatusOK, gin.H{
-		"head_app_id":      headAppId,
-		"shop_name":        request.ShopName,
-		"shop_status":      request.ShopName,
-		"shop_auth_status": request.ShopAuthStatus,
-		"page_num":         request.PageNum,
-		"page_size":        request.PageSize,
-	})
 	return
 }
