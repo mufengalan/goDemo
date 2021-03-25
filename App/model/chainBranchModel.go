@@ -5,20 +5,13 @@ import (
 	"head_server/database"
 )
 
-var doctor = database.Connection{
-	Host:     "LOCAL_HOST",
-	Port:     "LOCAL_PORT",
-	Username: "LOCAL_USER",
-	Password: "LOCAL_PASS",
-	Dbname:   "db_ex_doctor",
-}
-
 type student struct {
 	Name string
 }
 
 func GetDoctorList(AppId string) string {
-	engine := MysqlConnection(doctor)
+	//连接数据库
+	engine := MysqlConnection(database.Doctor)
 	engine.ShowSQL(true)
 	Student := &student{}
 	has, _ := engine.Where("id = ?", 1).Cols("name").Get(Student)

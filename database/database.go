@@ -18,3 +18,12 @@ type Connection struct {
 	Password string
 	Dbname   string
 }
+
+//本地库测试
+var Doctor = Connection{
+	Host:     "LOCAL_HOST",
+	Port:     "LOCAL_PORT",
+	Username: "LOCAL_USER",
+	Password: "LOCAL_PASS",
+	Dbname:   "db_ex_doctor",
+}
