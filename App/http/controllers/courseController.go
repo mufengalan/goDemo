@@ -15,7 +15,7 @@ type Request struct {
 	PageSize       int    `json:"page_size"`
 }
 
-func ShopList(c *gin.Context) {
+func DoctorList(c *gin.Context) {
 	var request Request
 	c.BindJSON(&request)
 
@@ -26,7 +26,7 @@ func ShopList(c *gin.Context) {
 	pageNum := request.PageNum
 	pageSize := request.PageSize
 
-	headAppId := model.GetShopList(appId)
+	headAppId := model.GetDoctorList(appId)
 	c.JSON(http.StatusOK, gin.H{
 		"app_id":           appId,
 		"shop_name":        shopName,

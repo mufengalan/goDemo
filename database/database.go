@@ -3,17 +3,18 @@ package database
 import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
-	"head_server/app/model"
 )
+
+var DB *Database
 
 type Database struct {
 	Example *xorm.Engine
 }
 
-var DB *Database
-
-func Load() {
-	DB = &Database{
-		Example: model.SetChainBranchRelation(),
-	}
+type Connection struct {
+	Host     string
+	Port     string
+	Username string
+	Password string
+	Dbname   string
 }

@@ -2,30 +2,23 @@ package model
 
 import (
 	"fmt"
-	"github.com/go-xorm/xorm"
-	"head_server/support"
+	"head_server/database"
 )
 
-var connection = "db_ex_doctor"
-
-func SetChainBranchRelation() *xorm.Engine {
-
-	host := support.GetCfgString("LOCAL_HOST")
-	port := support.GetCfgInt("LOCAL_PORT")
-	username := support.GetCfgString("LOCAL_USER")
-	password := support.GetCfgString("LOCAL_PASS")
-	dbname := connection
-	addr := fmt.Sprintf("%s:%d", host, port)
-	return support.OpenEngine(addr, username, password, dbname)
+var doctor = database.Connection{
+	Host:     "LOCAL_HOST",
+	Port:     "LOCAL_PORT",
+	Username: "LOCAL_USER",
+	Password: "LOCAL_PASS",
+	Dbname:   "db_ex_doctor",
 }
 
 type student struct {
 	Name string
 }
 
-func GetShopList(AppId string) string {
-
-	engine := SetChainBranchRelation()
+func GetDoctorList(AppId string) string {
+	engine := MysqlConnection(doctor)
 	engine.ShowSQL(true)
 	Student := &student{}
 	has, _ := engine.Where("id = ?", 1).Cols("name").Get(Student)

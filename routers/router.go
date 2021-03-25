@@ -9,6 +9,6 @@ func Load(g *gin.Engine) {
 	/****课程管理****/
 	prefix := g.Group("/course_manage")
 	{
-		prefix.POST("/shop_list", controllers.ShopList)
+		prefix.POST("/shop_list", controllers.DoctorList)
 	}
 }
