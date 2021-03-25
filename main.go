@@ -8,8 +8,9 @@ import (
 
 func main() {
 	r := gin.Default()
-	//加载env配置
-	Config.Load(".env")
-	routers.Load(r)
+
+	Config.Load(".env") //加载env配置
+
+	routers.Load(r) //加载路由
 	r.Run()
 }
